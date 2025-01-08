@@ -34,10 +34,6 @@ docker run -it reproducible-project
    Ouvrir un navigateur
    Se rendre à l’URL : http://localhost:9999/notebooks/analysis.ipynb
    Selectionner “run” puis “run all cells”
-
-
-4. **Automation (Bonus)**  
-   - Explain the included GitHub Action that produces or analyzes data automatically.  
     
 ### Encountered Issues and Improvements
 1. Problème avec .append dans Pandas
