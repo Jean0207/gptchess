@@ -2,8 +2,7 @@
 
 ## Introduction
 
-Briefly introduce the subject of the study, the problem it addresses, and the key results or insights obtained from the reproduction and replication effort.
-
+Recent claims have suggested that large language models (LLMs), such as GPT variants, might excel at chess—even surpassing a majority of human players or consistently producing legal moves. This study systematically investigates these assertions by pitting different GPT models against established chess engines under various experimental conditions. The core challenge lies in ensuring robust reproducibility—carefully controlling prompts, game parameters, and model variants—to accurately assess both the legal move generation capabilities and the approximate Elo ratings of these systems. In the process, it provides evidence that certain chat-oriented fine-tuning strategies may actually reduce performance on a well-defined, rules-based task like chess
 ## Reproducibility
 
 ### How to Reproduce the Results
