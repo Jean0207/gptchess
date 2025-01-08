@@ -2,8 +2,7 @@
 
 ## Introduction
 
-Recent claims have suggested that large language models (LLMs), such as GPT variants, might excel at chess—even surpassing a majority of human players or consistently producing legal moves. This study systematically investigates these assertions by pitting different GPT models against established chess engines under various experimental conditions. The core challenge lies in ensuring robust reproducibility—carefully controlling prompts, game parameters, and model variants—to accurately assess both the legal move generation capabilities and the approximate Elo ratings of these systems. In the process, it provides evidence that certain chat-oriented fine-tuning strategies may actually reduce performance on a well-defined, rules-based task like chess
-## Reproducibility
+Des affirmations récentes suggèrent que les grands modèles de langage (LLMs), tels que les variantes de GPT, pourraient exceller aux échecs, surpassant même une majorité de joueurs humains ou produisant systématiquement des coups légaux. Cette étude examine systématiquement ces affirmations en confrontant différents modèles GPT à des moteurs d’échecs établis, et ce, dans diverses conditions expérimentales. Le principal défi réside dans la garantie d’une reproductibilité robuste, en contrôlant rigoureusement les prompts, les paramètres des parties et les variantes des modèles, afin d’évaluer avec précision à la fois les capacités de génération de coups légaux et les classements Elo approximatifs de ces systèmes. Au cours de ce processus, l’étude montre que certaines stratégies de fine-tuning orientées vers les interactions en langage naturel peuvent en réalité réduire les performances sur une tâche bien définie et régie par des règles, comme les échecs.
 
    ### How to Reproduce the Results
    1. **Requirements**  
