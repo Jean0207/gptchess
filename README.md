@@ -25,25 +25,26 @@ cloner le dépot :
 ```bash
 git clone https://github.com/Jean0207/gptchess/blob/main/README.md
  ```
+Puis une fois dans le dossier gptchess taper les commandes :
 ```bash
-     docker build -t reproducible-project .
-     docker run -it reproducible-project
+docker build -t reproducible-project .
+docker run -it reproducible-project
 ```
 
 3. **Reproducing Results**  
-   - Describe how to run the automated scripts or notebooks to reproduce data and analyze results:
-     ```bash
-     bash scripts/run_analysis.sh
-     ```
-   - Mention Jupyter notebooks (if applicable):  
-     Open `notebooks/reproduce_results.ipynb` to execute the analysis step-by-step.
+   Ouvrir un navigateur
+   Se rendre à l’URL : http://localhost:9999/notebooks/analysis.ipynb
+   Selectionner “run” puis “run all cells”
+
 
 4. **Automation (Bonus)**  
    - Explain the included GitHub Action that produces or analyzes data automatically.  
     
 ### Encountered Issues and Improvements
-- Report any challenges, errors, or deviations from the original study.
-- Describe how these issues were resolved or improved, if applicable.
+1. Problème avec .append dans Pandas
+Contexte : Le code original utilisait la méthode .append de Pandas pour ajouter des données à un DataFrame.
+Problème : À partir de Pandas v2.0, la méthode .append a été dépréciée et supprimée, ce qui a conduit à des erreurs lors de l'exécution du code sur des versions récentes de Pandas.
+Solution : Nous avons remplacé les appels à .append par la méthode .concat, qui est la méthode recommandée par la documentation officielle de Pandas. Cela a permis d'assurer la compatibilité avec les versions actuelles et futures de Pandas.
 
 ### Is the Original Study Reproducible?
 - Summarize the success or failure of reproducing the study.
