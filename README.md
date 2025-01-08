@@ -5,17 +5,30 @@
 Recent claims have suggested that large language models (LLMs), such as GPT variants, might excel at chess—even surpassing a majority of human players or consistently producing legal moves. This study systematically investigates these assertions by pitting different GPT models against established chess engines under various experimental conditions. The core challenge lies in ensuring robust reproducibility—carefully controlling prompts, game parameters, and model variants—to accurately assess both the legal move generation capabilities and the approximate Elo ratings of these systems. In the process, it provides evidence that certain chat-oriented fine-tuning strategies may actually reduce performance on a well-defined, rules-based task like chess
 ## Reproducibility
 
-### How to Reproduce the Results
-1. **Requirements**  
-   - List dependencies and their versions (e.g., Python, R, libraries, etc.).
-   - Specify any system requirements.
+   ### How to Reproduce the Results
+   1. **Requirements**  
+   Dependencies and Versions
+   Base Image:
+   Utilisation de Docker pour standardiser l'environnement.
+   System Requirements
+   Docker :
+   Version minimale : 20.10.x.
+   Configuration système recommandée :
+   Minimum 4 Go de RAM pour l'exécution des conteneurs.
+   Minimum 10 Go d'espace disque disponible pour les images Docker.
+   Système d'exploitation :
+   Windows 11
+
 
 2. **Setting Up the Environment**  
-   - Provide instructions for using the Dockerfile to create a reproducible environment:  
-     ```bash
+cloner le dépot :
+```bash
+git clone https://github.com/Jean0207/gptchess/blob/main/README.md
+ ```
+```bash
      docker build -t reproducible-project .
      docker run -it reproducible-project
-     ```
+```
 
 3. **Reproducing Results**  
    - Describe how to run the automated scripts or notebooks to reproduce data and analyze results:
