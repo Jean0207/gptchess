@@ -1,21 +1,24 @@
-# Étape 1 : Utiliser une image de base
+# Utiliser une image de base avec Jupyter
+FROM jupyter/base-notebook:latest
 FROM python:3.9-slim
 
-# Étape 2 : Définir le répertoire de travail dans le conteneur
+
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Étape 3 : Copier les fichiers nécessaires dans le conteneur
+# Copier le fichier notebook dans le conteneur
 COPY requirements.txt /tmp/requirements.txt
 COPY . /app/
 
-# Étape 4 : Installer les dépendances
+
+# Installer les dépendances Python si nécessaire
 RUN pip install --no-cache-dir --requirement /tmp/requirements.txt
+# Installer Jupyter Notebook et les dépendances nécessaires
+RUN pip install --no-cache-dir jupyter notebook pandas numpy matplotlib chess stockfish
 
-RUN pip install jupyter
 
+# Exposer le port Jupyter
+EXPOSE 8888
 
-# Étape 5 : Définir la commande par défaut (si nécessaire)
-CMD ["bash"]
-
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=9999", "--no-browser", "--allow-root"]
-
+# Lancer Jupyter Notebook au démarrage
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
