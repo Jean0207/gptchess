@@ -22,7 +22,7 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
 2. **Setting Up the Environment**  
 cloner le dépot :
 ```bash
-git clone https://github.com/Jean0207/gptchess/blob/main/README.md
+git clone git@github.com:Jean0207/gptchess.git
  ```
 Puis une fois dans le dossier gptchess taper les commandes :
 ```bash
@@ -130,27 +130,36 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Métriques cohérentes**            | Métriques d’évaluation, Modèle, Adversaire       | Le calcul du pourcentage de coups légaux ou du Elo doit être appliqué de manière cohérente pour tous les modèles et adversaires.                     |
 
 
-- **Exploring Variability Factors via CLI (Bonus)**  
-   - Provide instructions to use the command-line interface (CLI) to explore variability factors and their combinations:  
-     ```bash
-     python explore_variability.py --random-seed 42 --hardware GPU --dataset-version v1.1
-     ```
-   - Describe the functionality and parameters of the CLI:
-     - `--random-seed`: Specify the random seed to use.
-     - `--hardware`: Choose between CPU or GPU.
-     - `--dataset-version`: Select the dataset version.
-
 
 ### Replication Execution
 1. **Instructions**  
    - Provide detailed steps or commands for running the replication(s):  
-     ```bash
-     bash scripts/replicate_experiment.sh
-     ```
+   cloner le dépot :
+   ```bash
+   git clone git@github.com:Jean0207/gptchess.git
+    ```
+   Puis une fois dans le dossier gptchess taper les commandes :
+   ```bash
+   docker build -t reproducible-project .
+   docker run -it reproducible-project
+   ```
+   Pour reproduire la réplication :
+   Ouvrir un navigateur
+   Se rendre à l’URL : http://localhost:9999/notebooks/analysis2.ipynb
+   Selectionner “run” puis “run all cells”
+
 
 2. **Presentation and Analysis of Results**  
-   - Include results in text, tables, or figures.
-   - Analyze and compare with the original study's findings.
+   La formule initiale de dp, basée sur une table fixe, présentait plusieurs limites. Tout d'abord, elle introduisait des transitions abruptes entre les valeurs de dp, notamment pour des scores proches (par exemple, 49 % et 51 %), ce qui pouvait entraîner une incohérence dans les résultats. De plus, cette approche manquait de précision, car la granularité de la table ne permettait pas de refléter les petites différences de performance entre les modèles. Enfin, le recours à une table ajoutait une certaine rigidité et complexité inutile dans le calcul, limitant son adaptabilité à d'autres scénarios expérimentaux.
+   Pour remédier à ces problèmes, nous avons adopté une formule continue pour dp, définie comme dp=800×(p−0.5)dp = 800 \times (p - 0.5)dp=800×(p−0.5), où ppp représente le pourcentage de points obtenus. Cette nouvelle formule permet une variation progressive et fluide de dp, proportionnelle au pourcentage de points. Contrairement à la table fixe, elle prend en compte chaque variation, même minime, du score, rendant ainsi le calcul plus précis.
+   Cette modification présente plusieurs avantages. Les transitions entre les valeurs de dp deviennent plus fluides, ce qui améliore la cohérence des résultats, en particulier pour des performances proches. De plus, la précision accrue de la formule permet de mieux différencier les modèles, même en cas de variations faibles dans leurs performances. Enfin, cette approche simplifie le calcul en éliminant la dépendance à une table externe, rendant la méthode plus flexible et adaptée à différents contextes.
+   En conséquence, cette modification améliore la capacité du calcul de dp à refléter la performance réelle des modèles. 
+
+### Nouvel elo obtenu pour les modèles gpt-3.5-turbo-instruct et gpt-4 avec modification de la fonction de dp ###
+
+### Ancien elo pour les modèles gpt-3.5-turbo-instruct et gpt-4 ###
+
+
 
 ### Does It Confirm the Original Study?
 - Summarize the extent to which the replication supports the original study’s conclusions.
