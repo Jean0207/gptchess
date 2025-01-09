@@ -13,6 +13,8 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
       ### Install stockfish
       
       See https://stockfishchess.org/download/ we are using the stockfish-ubuntu-x86-64-sse41-popcnt
+      Modifier la variable path_to_stockfish pour qu'elle corresponde au chemin de votre fichier stockfish.
+      
 
 
       ### System Requirements
