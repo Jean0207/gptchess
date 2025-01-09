@@ -1,10 +1,10 @@
-# Project Title
+# Chess GPT
 
 ## Introduction
 
 Des affirmations récentes suggèrent que les grands modèles de langage (LLMs), tels que les variantes de GPT, pourraient exceller aux échecs, surpassant même une majorité de joueurs humains ou produisant systématiquement des coups légaux. Cette étude examine systématiquement ces affirmations en confrontant différents modèles GPT à des moteurs d’échecs établis, et ce, dans diverses conditions expérimentales. Le principal défi réside dans la garantie d’une reproductibilité robuste, en contrôlant rigoureusement les prompts, les paramètres des parties et les variantes des modèles, afin d’évaluer avec précision à la fois les capacités de génération de coups légaux et les classements Elo approximatifs de ces systèmes. Au cours de ce processus, l’étude montre que certaines stratégies de fine-tuning orientées vers les interactions en langage naturel peuvent en réalité réduire les performances sur une tâche bien définie et régie par des règles, comme les échecs.
 
-   ### How to Reproduce the Results
+   ### Comment reproduire les résultats
    1. **Requirements**  
    Dependencies and Versions
    Base Image:
@@ -19,7 +19,7 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
    Windows 11
 
 
-2. **Setting Up the Environment**  
+2. **Mise en place de l'environnement**  
 cloner le dépot :
 ```bash
 git clone git@github.com:Jean0207/gptchess.git
@@ -30,18 +30,18 @@ docker build -t reproducible-project .
 docker run -it reproducible-project
 ```
 
-3. **Reproducing Results**  
+3. **Reproduire les résultats**  
    Ouvrir un navigateur
    Se rendre à l’URL : http://localhost:9999/notebooks/analysis.ipynb
    Selectionner “run” puis “run all cells”
     
-### Encountered Issues and Improvements
+### Problèmes rencontrés et améliorations
 1. Problème avec .append dans Pandas
 Contexte : Le code original utilisait la méthode .append de Pandas pour ajouter des données à un DataFrame.
 Problème : À partir de Pandas v2.0, la méthode .append a été dépréciée et supprimée, ce qui a conduit à des erreurs lors de l'exécution du code sur des versions récentes de Pandas.
 Solution : Nous avons remplacé les appels à .append par la méthode .concat, qui est la méthode recommandée par la documentation officielle de Pandas. Cela a permis d'assurer la compatibilité avec les versions actuelles et futures de Pandas.
 
-### Is the Original Study Reproducible?
+### L'étude originale est-elle reproductible ?
 
 ## Comparaison des Résultats pour Text-Davinci-003 : Analyse Originale vs Reproduite
 
@@ -95,12 +95,12 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 
 
 
-## Replicability
+## Réplication
 
-### Variability Factors
-## Variability Factors
+### Facteurs de variabilité
+## Facteurs de variabilité
 
-| **Variability Factor**   | **Possible Values**                           | **Relevance**                                                                           |
+| **Facteurs de variabilité**   | **Valeurs possibles**                           | **Pertinence**                                                                           |
 |---------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------|
 | **Model Version**         | GPT-3.5, GPT-4                               | Affects model behavior and output quality                                              |
 | **Temperature**           | 0, 0.8, 1.0                                  | Controls diversity and determinism of responses                                        |
@@ -114,7 +114,7 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **API vs Local Execution**| API, Local Execution                         | API settings may differ from local model behavior                                      |
 
 
-- **Constraints Across Factors**:  
+- **Contraintes entre les facteurs**:  
 
 ## Contraintes et Interdépendances
 
@@ -131,7 +131,7 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 
 
 
-### Replication Execution
+### Exécution de la réplication
 1. **Instructions**  
    - Provide detailed steps or commands for running the replication(s):  
    cloner le dépot :
@@ -149,7 +149,7 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
    Selectionner “run” puis “run all cells”
 
 
-2. **Presentation and Analysis of Results**  
+2. **Présentation et analyses des résultats**  
    La formule initiale de dp, basée sur une table fixe, présentait plusieurs limites. Tout d'abord, elle introduisait des transitions abruptes entre les valeurs de dp, notamment pour des scores proches (par exemple, 49 % et 51 %), ce qui pouvait entraîner une incohérence dans les résultats. De plus, cette approche manquait de précision, car la granularité de la table ne permettait pas de refléter les petites différences de performance entre les modèles. Enfin, le recours à une table ajoutait une certaine rigidité et complexité inutile dans le calcul, limitant son adaptabilité à d'autres scénarios expérimentaux.
    Pour remédier à ces problèmes, nous avons adopté une formule continue pour dp, définie comme dp=800×(p−0.5)dp = 800 \times (p - 0.5)dp=800×(p−0.5), où ppp représente le pourcentage de points obtenus. Cette nouvelle formule permet une variation progressive et fluide de dp, proportionnelle au pourcentage de points. Contrairement à la table fixe, elle prend en compte chaque variation, même minime, du score, rendant ainsi le calcul plus précis.
    Cette modification présente plusieurs avantages. Les transitions entre les valeurs de dp deviennent plus fluides, ce qui améliore la cohérence des résultats, en particulier pour des performances proches. De plus, la précision accrue de la formule permet de mieux différencier les modèles, même en cas de variations faibles dans leurs performances. Enfin, cette approche simplifie le calcul en éliminant la dépendance à une table externe, rendant la méthode plus flexible et adaptée à différents contextes.
@@ -164,9 +164,8 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 
 
 
-### Does It Confirm the Original Study?
-Après la modification de la formule de 
-dp, les résultats montrent des différences faibles dans les classements Elo des modèles, confirmant les tendances générales observées avant modification. Par exemple, pour GPT-3.5-turbo-instruct, l'Elo avec des parties légales uniquement passe de 1743.0 avant modification à 1738.0 après modification, tandis que l'Elo pour toutes les parties passe de 1696.0 à 1688.0. De même, pour GPT-4, l'Elo avec des parties légales uniquement varie légèrement de 1371.0 à 1471.0, et celui pour toutes les parties passe de 1305.0 à 1444.0.
+### Est ce que ca confirme l'étude originale ?
+Après la modification de la formule de dp, les résultats montrent des différences faibles dans les classements Elo des modèles, confirmant les tendances générales observées avant modification. Par exemple, pour GPT-3.5-turbo-instruct, l'Elo avec des parties légales uniquement passe de 1743.0 avant modification à 1738.0 après modification, tandis que l'Elo pour toutes les parties passe de 1696.0 à 1688.0. De même, pour GPT-4, l'Elo avec des parties légales uniquement varie légèrement de 1371.0 à 1471.0, et celui pour toutes les parties passe de 1305.0 à 1444.0.
 
 Ces variations mineures, également constatées pour différentes températures, confirment la cohérence des résultats initiaux. À 𝑡=0.0 t=0.0, par exemple, l'Elo de GPT-3.5-turbo-instruct reste quasiment inchangé (1789.0 avant modification contre 1780.0 après). Les résultats démontrent ainsi que la nouvelle formule de 𝑑𝑝 n'altère pas significativement les conclusions et valide les observations initiales.
 
