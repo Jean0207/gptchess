@@ -9,7 +9,12 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
       ### Dependencies and Versions
       - **Base Image**:  
         Utilisation de Docker pour standardiser l'environnement.
+        
+      ### Install stockfish
       
+      See https://stockfishchess.org/download/ we are using the stockfish-windows-x86-64-sse41-popcnt.exe.
+
+
       ### System Requirements
       - **Docker**:  
         - Version minimale : `20.10.x`.  
@@ -21,7 +26,7 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
         - **Windows 11**
 
 
-2. **Mise en place de l'environnement**  
+3. **Mise en place de l'environnement**  
 cloner le dépot :
 ```bash
 git clone git@github.com:Jean0207/gptchess.git
