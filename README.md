@@ -98,19 +98,37 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 ## Replicability
 
 ### Variability Factors
-- **List of Factors**: Identify all potential sources of variability (e.g., dataset splits, random seeds, hardware).  
-  Example table:
-  | Variability Factor | Possible Values     | Relevance                                   |
-  |--------------------|---------------------|--------------------------------------------|
-  | Random Seed        | [0, 42, 123]       | Impacts consistency of random processes    |
-  | Hardware           | CPU, GPU (NVIDIA)  | May affect computation time and results    |
-  | Dataset Version    | v1.0, v1.1         | Ensures comparability across experiments   |
+## Variability Factors
+
+| **Variability Factor**   | **Possible Values**                           | **Relevance**                                                                           |
+|---------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------|
+| **Model Version**         | GPT-3.5, GPT-4                               | Affects model behavior and output quality                                              |
+| **Temperature**           | 0, 0.8, 1.0                                  | Controls diversity and determinism of responses                                        |
+| **Prompt Formulation**    | Standard PGN, Chat-oriented, Altered Prompts | Directly influences the ability to generate legal moves                                |
+| **Adversary (Chess Engine)** | Stockfish (Skill Level 1-20), Random Engine | Impacts difficulty and variability of the game                                         |
+| **Position Initialization** | Standard Openings, Random n=10 Moves         | Tests robustness to unusual board positions                                            |
+| **Random Seed**           | [0, 42, 123]                                 | Impacts consistency of random processes                                                |
+| **Hardware**              | CPU, GPU                                     | May affect computation time and reproducibility                                        |
+| **Evaluation Metrics**    | Legal Moves %, Elo Rating                    | Ensures comparability and relevance of results                                         |
+| **Dataset Size**          | 100 games, 500 games                         | Larger datasets increase robustness of conclusions                                     |
+| **API vs Local Execution**| API, Local Execution                         | API settings may differ from local model behavior                                      |
+
 
 - **Constraints Across Factors**:  
-  - Document any constraints or interdependencies among variability factors.  
-    For example:
-    - Random Seed must align with dataset splits for consistent results.
-    - Hardware constraints may limit the choice of GPU-based factors.
+
+## Contraintes et Interdépendances
+
+| **Contrainte**                      | **Facteurs Impactés**                             | **Explication**                                                                                                                                      |
+|-------------------------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Compatibilité du modèle**         | Modèle (GPT-3.5, GPT-4), Température             | Certaines versions de modèles (comme GPT-4) sont plus sensibles aux variations de température, influençant la sortie.                                |
+| **Pertinence des prompts**          | Prompt, Modèle                                   | La formulation des prompts doit être adaptée à chaque modèle. Par exemple, les prompts PGN standard conviennent mieux à GPT-3.5-turbo-instruct.      |
+| **Adversaire et niveau de compétence** | Adversaire, Température                         | L'adversaire choisi (Stockfish vs moteur aléatoire) peut interagir différemment avec des réponses plus ou moins déterministes (contrôlées par la température). |
+| **Position initiale aléatoire**     | Initialisation des positions, Adversaire         | Les positions aléatoires (n=10 premiers coups) peuvent perturber davantage les moteurs faibles qu’un adversaire comme Stockfish.                     |
+| **Limites matérielles**             | Matériel, Modèle                                 | L'utilisation de modèles plus complexes (comme GPT-4) ou de paramètres exigeants (profondeur de Stockfish) dépend des capacités matérielles.         |
+| **Graines aléatoires**              | Graines aléatoires, Initialisation des positions | Une graine différente modifiera l’ordre des parties ou des positions initiales, rendant les comparaisons non reproductibles.                        |
+| **Influence des adversaires**       | Adversaire, Longueur des parties                 | Les moteurs d’échecs puissants tendent à prolonger les parties, ce qui peut tester la capacité du modèle à rester précis sur de longues séquences.    |
+| **Métriques cohérentes**            | Métriques d’évaluation, Modèle, Adversaire       | Le calcul du pourcentage de coups légaux ou du Elo doit être appliqué de manière cohérente pour tous les modèles et adversaires.                     |
+
 
 - **Exploring Variability Factors via CLI (Bonus)**  
    - Provide instructions to use the command-line interface (CLI) to explore variability factors and their combinations:  
