@@ -22,7 +22,7 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
 2. **Setting Up the Environment**  
 cloner le dépot :
 ```bash
-git clone https://github.com/Jean0207/gptchess/blob/main/README.md
+git clone git@github.com:Jean0207/gptchess.git
  ```
 Puis une fois dans le dossier gptchess taper les commandes :
 ```bash
@@ -98,41 +98,68 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 ## Replicability
 
 ### Variability Factors
-- **List of Factors**: Identify all potential sources of variability (e.g., dataset splits, random seeds, hardware).  
-  Example table:
-  | Variability Factor | Possible Values     | Relevance                                   |
-  |--------------------|---------------------|--------------------------------------------|
-  | Random Seed        | [0, 42, 123]       | Impacts consistency of random processes    |
-  | Hardware           | CPU, GPU (NVIDIA)  | May affect computation time and results    |
-  | Dataset Version    | v1.0, v1.1         | Ensures comparability across experiments   |
+## Variability Factors
+
+| **Variability Factor**   | **Possible Values**                           | **Relevance**                                                                           |
+|---------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------|
+| **Model Version**         | GPT-3.5, GPT-4                               | Affects model behavior and output quality                                              |
+| **Temperature**           | 0, 0.8, 1.0                                  | Controls diversity and determinism of responses                                        |
+| **Prompt Formulation**    | Standard PGN, Chat-oriented, Altered Prompts | Directly influences the ability to generate legal moves                                |
+| **Adversary (Chess Engine)** | Stockfish (Skill Level 1-20), Random Engine | Impacts difficulty and variability of the game                                         |
+| **Position Initialization** | Standard Openings, Random n=10 Moves         | Tests robustness to unusual board positions                                            |
+| **Random Seed**           | [0, 42, 123]                                 | Impacts consistency of random processes                                                |
+| **Hardware**              | CPU, GPU                                     | May affect computation time and reproducibility                                        |
+| **Evaluation Metrics**    | Legal Moves %, Elo Rating                    | Ensures comparability and relevance of results                                         |
+| **Dataset Size**          | 100 games, 500 games                         | Larger datasets increase robustness of conclusions                                     |
+| **API vs Local Execution**| API, Local Execution                         | API settings may differ from local model behavior                                      |
+
 
 - **Constraints Across Factors**:  
-  - Document any constraints or interdependencies among variability factors.  
-    For example:
-    - Random Seed must align with dataset splits for consistent results.
-    - Hardware constraints may limit the choice of GPU-based factors.
 
-- **Exploring Variability Factors via CLI (Bonus)**  
-   - Provide instructions to use the command-line interface (CLI) to explore variability factors and their combinations:  
-     ```bash
-     python explore_variability.py --random-seed 42 --hardware GPU --dataset-version v1.1
-     ```
-   - Describe the functionality and parameters of the CLI:
-     - `--random-seed`: Specify the random seed to use.
-     - `--hardware`: Choose between CPU or GPU.
-     - `--dataset-version`: Select the dataset version.
+## Contraintes et Interdépendances
+
+| **Contrainte**                      | **Facteurs Impactés**                             | **Explication**                                                                                                                                      |
+|-------------------------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Compatibilité du modèle**         | Modèle (GPT-3.5, GPT-4), Température             | Certaines versions de modèles (comme GPT-4) sont plus sensibles aux variations de température, influençant la sortie.                                |
+| **Pertinence des prompts**          | Prompt, Modèle                                   | La formulation des prompts doit être adaptée à chaque modèle. Par exemple, les prompts PGN standard conviennent mieux à GPT-3.5-turbo-instruct.      |
+| **Adversaire et niveau de compétence** | Adversaire, Température                         | L'adversaire choisi (Stockfish vs moteur aléatoire) peut interagir différemment avec des réponses plus ou moins déterministes (contrôlées par la température). |
+| **Position initiale aléatoire**     | Initialisation des positions, Adversaire         | Les positions aléatoires (n=10 premiers coups) peuvent perturber davantage les moteurs faibles qu’un adversaire comme Stockfish.                     |
+| **Limites matérielles**             | Matériel, Modèle                                 | L'utilisation de modèles plus complexes (comme GPT-4) ou de paramètres exigeants (profondeur de Stockfish) dépend des capacités matérielles.         |
+| **Graines aléatoires**              | Graines aléatoires, Initialisation des positions | Une graine différente modifiera l’ordre des parties ou des positions initiales, rendant les comparaisons non reproductibles.                        |
+| **Influence des adversaires**       | Adversaire, Longueur des parties                 | Les moteurs d’échecs puissants tendent à prolonger les parties, ce qui peut tester la capacité du modèle à rester précis sur de longues séquences.    |
+| **Métriques cohérentes**            | Métriques d’évaluation, Modèle, Adversaire       | Le calcul du pourcentage de coups légaux ou du Elo doit être appliqué de manière cohérente pour tous les modèles et adversaires.                     |
+
 
 
 ### Replication Execution
 1. **Instructions**  
    - Provide detailed steps or commands for running the replication(s):  
-     ```bash
-     bash scripts/replicate_experiment.sh
-     ```
+   cloner le dépot :
+   ```bash
+   git clone git@github.com:Jean0207/gptchess.git
+    ```
+   Puis une fois dans le dossier gptchess taper les commandes :
+   ```bash
+   docker build -t reproducible-project .
+   docker run -it reproducible-project
+   ```
+   Pour reproduire la réplication :
+   Ouvrir un navigateur
+   Se rendre à l’URL : http://localhost:9999/notebooks/analysis2.ipynb
+   Selectionner “run” puis “run all cells”
+
 
 2. **Presentation and Analysis of Results**  
-   - Include results in text, tables, or figures.
-   - Analyze and compare with the original study's findings.
+   La formule initiale de dp, basée sur une table fixe, présentait plusieurs limites. Tout d'abord, elle introduisait des transitions abruptes entre les valeurs de dp, notamment pour des scores proches (par exemple, 49 % et 51 %), ce qui pouvait entraîner une incohérence dans les résultats. De plus, cette approche manquait de précision, car la granularité de la table ne permettait pas de refléter les petites différences de performance entre les modèles. Enfin, le recours à une table ajoutait une certaine rigidité et complexité inutile dans le calcul, limitant son adaptabilité à d'autres scénarios expérimentaux.
+   Pour remédier à ces problèmes, nous avons adopté une formule continue pour dp, définie comme dp=800×(p−0.5)dp = 800 \times (p - 0.5)dp=800×(p−0.5), où ppp représente le pourcentage de points obtenus. Cette nouvelle formule permet une variation progressive et fluide de dp, proportionnelle au pourcentage de points. Contrairement à la table fixe, elle prend en compte chaque variation, même minime, du score, rendant ainsi le calcul plus précis.
+   Cette modification présente plusieurs avantages. Les transitions entre les valeurs de dp deviennent plus fluides, ce qui améliore la cohérence des résultats, en particulier pour des performances proches. De plus, la précision accrue de la formule permet de mieux différencier les modèles, même en cas de variations faibles dans leurs performances. Enfin, cette approche simplifie le calcul en éliminant la dépendance à une table externe, rendant la méthode plus flexible et adaptée à différents contextes.
+   En conséquence, cette modification améliore la capacité du calcul de dp à refléter la performance réelle des modèles. 
+
+### Nouvel elo obtenu pour les modèles gpt-3.5-turbo-instruct et gpt-4 avec modification de la fonction de dp ###
+
+### Ancien elo pour les modèles gpt-3.5-turbo-instruct et gpt-4 ###
+
+
 
 ### Does It Confirm the Original Study?
 - Summarize the extent to which the replication supports the original study’s conclusions.
