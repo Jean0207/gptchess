@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Des affirmations récentes suggèrent que les grands modèles de langage (LLMs), tels que les variantes de GPT, pourraient exceller aux échecs, surpassant même une majorité de joueurs humains ou produisant systématiquement des coups légaux. Cette étude examine systématiquement ces affirmations en confrontant différents modèles GPT à des moteurs d’échecs établis, et ce, dans diverses conditions expérimentales. Le principal défi réside dans la garantie d’une reproductibilité robuste, en contrôlant rigoureusement les prompts, les paramètres des parties et les variantes des modèles, afin d’évaluer avec précision à la fois les capacités de génération de coups légaux et les classements Elo approximatifs de ces systèmes. Au cours de ce processus, l’étude montre que certaines stratégies de fine-tuning orientées vers les interactions en langage naturel peuvent en réalité réduire les performances sur une tâche bien définie et régie par des règles, comme les échecs.
+Des affirmations récentes suggèrent que les grands modèles de langage (LLMs), tels que les variantes de GPT, pourraient exceller aux échecs, surpassant même une majorité de joueurs humains ou produisant systématiquement des coups légaux. Cette étude examine ces affirmations en confrontant différents modèles GPT à des moteurs d’échecs établis, et ce, dans diverses conditions expérimentales. Le principal défi réside dans la garantie d’une reproductibilité robuste, en contrôlant rigoureusement les prompts, les paramètres des parties et les variantes des modèles, afin d’évaluer avec précision à la fois les capacités de génération de coups légaux et les classements Elo approximatifs de ces systèmes. Au cours de ce processus, l’étude montre que certaines stratégies de fine-tuning orientées vers les interactions en langage naturel peuvent en réalité réduire les performances sur une tâche bien définie et régie par des règles, comme les échecs.
 
    ### Comment reproduire les résultats
    1. **Requirements**  
@@ -131,6 +131,7 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 
 <br>
 
+
 | **Métrique**                            | **Étude Originale** | **Résultats Reproduits** | **Commentaire**                                                                 |
 |-----------------------------------------|---------------------|--------------------------|---------------------------------------------------------------------------------|
 | **Total de parties jouées contre Stockfish (SF)** | 30                  | 30                       | Les résultats reproduits correspondent parfaitement au nombre total de parties jouées contre SF. |
@@ -143,20 +144,20 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 
 ## Réplication
 
-### Facteurs de variabilité
+### Facteurs de Variabilité
 
-| **Facteurs de variabilité**   | **Valeurs possibles**                           | **Pertinence**                                                                           |
-|---------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------|
-| **Model Version**         | GPT-3.5, GPT-4                               | Affects model behavior and output quality                                              |
-| **Temperature**           | 0, 0.8, 1.0                                  | Controls diversity and determinism of responses                                        |
-| **Prompt Formulation**    | Standard PGN, Chat-oriented, Altered Prompts | Directly influences the ability to generate legal moves                                |
-| **Adversary (Chess Engine)** | Stockfish (Skill Level 1-20), Random Engine | Impacts difficulty and variability of the game                                         |
-| **Position Initialization** | Standard Openings, Random n=10 Moves         | Tests robustness to unusual board positions                                            |
-| **Random Seed**           | [0, 42, 123]                                 | Impacts consistency of random processes                                                |
-| **Hardware**              | CPU, GPU                                     | May affect computation time and reproducibility                                        |
-| **Evaluation Metrics**    | Legal Moves %, Elo Rating                    | Ensures comparability and relevance of results                                         |
-| **Dataset Size**          | 100 games, 500 games                         | Larger datasets increase robustness of conclusions                                     |
-| **API vs Local Execution**| API, Local Execution                         | API settings may differ from local model behavior                                      |
+| **Facteurs de Variabilité**  | **Valeurs Possibles**                          | **Pertinence**                                                                           |
+|------------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------|
+| **Version du Modèle**        | GPT-3.5, GPT-4                               | Influence le comportement du modèle et la qualité des résultats                         |
+| **Température**              | 0, 0.8, 1.0                                  | Contrôle la diversité et le déterminisme des réponses                                   |
+| **Formulation du Prompt**    | PGN Standard, Orienté Chat, Prompts Modifiés  | Impacte directement la capacité à générer des coups légaux                              |
+| **Adversaire (Moteur d'Échecs)** | Stockfish (Niveau 1-20), Moteur Aléatoire    | Affecte la difficulté et la variabilité des parties                                     |
+| **Initialisation des Positions** | Ouvertures Standard, Aléatoire n=10 Coups    | Évalue la robustesse face à des positions de plateau inhabituelles                      |
+| **Graine Aléatoire (Random Seed)** | [0, 42, 123]                                 | Impacte la cohérence des processus aléatoires                                           |
+| **Matériel**                 | CPU, GPU                                     | Peut influencer le temps de calcul et la reproductibilité                               |
+| **Métriques d'Évaluation**   | Pourcentage de Coups Légaux, Classement Elo  | Assure la comparabilité et la pertinence des résultats                                  |
+| **Taille du Jeu de Données** | 100 parties, 500 parties                     | Des jeux de données plus larges augmentent la robustesse des conclusions                |
+| **API vs Exécution Locale**  | API, Exécution Locale                        | Les paramètres de l'API peuvent différer du comportement du modèle exécuté localement   |
 
 <br>
 
