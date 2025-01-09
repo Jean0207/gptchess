@@ -26,19 +26,19 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
         - **Ubuntu 22.04**
 
 
-3. **Mise en place de l'environnement**  
-cloner le dépot :
-```bash
-git clone git@github.com:Jean0207/gptchess.git
- ```
-Décompresser games.tar.gz  
-Une fois dans le dossier gptchess taper les commandes :
-```bash
-docker build -t notebook-environnement .
-docker run -it -p 9999:8888 notebook-environnement
-```
+3. **Mise en place de l'environnement**    
+   Cloner le dépot :
+   ```bash
+   git clone git@github.com:Jean0207/gptchess.git
+    ```
+   Décompresser games.tar.gz  
+   Une fois dans le dossier gptchess taper les commandes :
+   ```bash
+   docker build -t notebook-environnement .
+   docker run -it -p 9999:8888 notebook-environnement
+   ```
 
-3. **Reproduire les résultats**  
+3. **Reproduire les résultats**    
    Ouvrir un navigateur
    Se rendre à l’URL : http://localhost:9999/notebooks/analysis.ipynb
    Selectionner “run” puis “run all cells”
