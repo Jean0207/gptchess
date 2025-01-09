@@ -12,7 +12,7 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
         
       ### Install stockfish
       
-      See https://stockfishchess.org/download/ we are using the stockfish-windows-x86-64-sse41-popcnt.exe.
+      See https://stockfishchess.org/download/ we are using the stockfish-ubuntu-x86-64-sse41-popcnt
 
 
       ### System Requirements
@@ -23,7 +23,7 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
           - **Minimum 10 Go d'espace disque** disponible pour les images Docker.
       
       - **Système d'exploitation**:  
-        - **Windows 11**
+        - **Ubuntu 22.04**
 
 
 3. **Mise en place de l'environnement**  
@@ -31,11 +31,11 @@ cloner le dépot :
 ```bash
 git clone git@github.com:Jean0207/gptchess.git
  ```
-Ouvrir l'application Docker Desktop
-Puis une fois dans le dossier gptchess taper les commandes :
+Décompresser games.tar.gz  
+Une fois dans le dossier gptchess taper les commandes :
 ```bash
-docker build -t reproducible-project .
-docker run -it reproducible-project
+docker build -t notebook-environnement .
+docker run -it -p 9999:8888 notebook-environnement
 ```
 
 3. **Reproduire les résultats**  
