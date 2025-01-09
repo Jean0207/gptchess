@@ -31,6 +31,7 @@ cloner le dépot :
 ```bash
 git clone git@github.com:Jean0207/gptchess.git
  ```
+Ouvrir l'application Docker Desktop
 Puis une fois dans le dossier gptchess taper les commandes :
 ```bash
 docker build -t reproducible-project .
@@ -43,16 +44,22 @@ docker run -it reproducible-project
    Selectionner “run” puis “run all cells”
     
 ### Problèmes rencontrés et améliorations
-1. Problème avec .append dans Pandas
+Problème avec .append dans Pandas
 Contexte : Le code original utilisait la méthode .append de Pandas pour ajouter des données à un DataFrame.
 Problème : À partir de Pandas v2.0, la méthode .append a été dépréciée et supprimée, ce qui a conduit à des erreurs lors de l'exécution du code sur des versions récentes de Pandas.
 Solution : Nous avons remplacé les appels à .append par la méthode .concat, qui est la méthode recommandée par la documentation officielle de Pandas. Cela a permis d'assurer la compatibilité avec les versions actuelles et futures de Pandas.
 
-### L'étude originale est-elle reproductible ?
+## L'étude originale est-elle reproductible ?
 
-## Comparaison des Résultats pour Text-Davinci-003 : Analyse Originale vs Reproduite
+### Comparaison des Résultats pour Text-Davinci-003 : Analyse Originale vs Reproduite
 
-![Résultats pour Text-Davinci-003](./davinci.png)
+<br>
+<div align="center">
+  <img src="./davinci.png" alt="Résultats pour Text-Davinci-003" style="width:50%;"><br>
+  <em>Figure 1 : Résultats pour Text-Davinci-003</em>
+</div>
+
+<br>
 
 | **Métrique**                     | **Étude Originale** | **Résultats Reproduits** | **Commentaire**                                                                 |
 |----------------------------------|---------------------|--------------------------|---------------------------------------------------------------------------------|
@@ -65,9 +72,20 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Durée moyenne des parties**     | 12 coups            | 12 coups                 | Les résultats reproduits sont cohérents avec l'étude originale.                 |
 | **Durée médiane des parties**     | 12 coups            | 12 coups                 | La durée médiane des parties est identique dans les deux études.                |
 
-![Résultats pour GPT-3.5-Turbo-Instruct](./turbo-instruct.png)
+<br>
 
-## Comparaison des Résultats pour GPT-3.5-Turbo-Instruct : Analyse Originale vs Reproduite
+
+
+
+### Comparaison des Résultats pour GPT-3.5-Turbo-Instruct : Analyse Originale vs Reproduite
+
+<br>
+<div align="center">
+  <img src="./turbo-instruct.png" alt="Résultats pour GPT-3.5-Turbo-Instruct" style="width:50%;"><br>
+  <em>Figure 2 : Résultats pour GPT-3.5-Turbo-Instruct</em>
+</div>
+
+<br>
 
 | **Métrique**                            | **Étude Originale** | **Résultats Reproduits** | **Commentaire**                                                                 |
 |-----------------------------------------|---------------------|--------------------------|---------------------------------------------------------------------------------|
@@ -77,9 +95,19 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Elo moyen (parties légales)**         | 1743                | 1743                     | Correspondance parfaite pour l'Elo basé uniquement sur les parties légales.    |
 | **Elo moyen (toutes les parties)**      | 1696                | 1696                     | Les résultats reproduits pour l'Elo, incluant toutes les parties, correspondent parfaitement. |
 
-![Résultats pour GPT-4](./gpt4.png)
+<br>
 
-## Comparaison des Résultats pour GPT-4 : Analyse Originale vs Reproduite
+
+
+### Comparaison des Résultats pour GPT-4 : Analyse Originale vs Reproduite
+
+<br>
+<div align="center">
+  <img src="./gpt4.png" alt="Résultats pour GPT-4" style="width:50%;"><br>
+  <em>Figure 3 : Résultats pour GPT-4</em>
+</div>
+
+<br>
 
 | **Métrique**                            | **Étude Originale** | **Résultats Reproduits** | **Commentaire**                                                                 |
 |-----------------------------------------|---------------------|--------------------------|---------------------------------------------------------------------------------|
@@ -89,9 +117,19 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Elo moyen (parties légales)**         | 1371                | 1371                     | Correspondance parfaite pour l'Elo basé uniquement sur les parties légales.    |
 | **Elo moyen (toutes les parties)**      | 1305                | 1305                     | Les résultats reproduits pour l'Elo, incluant toutes les parties, correspondent parfaitement. |
 
-![Résultats pour GPT-3.5-Turbo](./turbo.png)
+<br>
 
-## Comparaison des Résultats pour GPT-3.5-Turbo : Analyse Originale vs Reproduite
+
+
+### Comparaison des Résultats pour GPT-3.5-Turbo : Analyse Originale vs Reproduite
+
+<br>
+<div align="center">
+  <img src="./turbo.png" alt="Résultats pour GPT-3.5-Turbo" style="width:50%;"><br>
+  <em>Figure 4 : Résultats pour GPT-3.5-Turbo</em>
+</div>
+
+<br>
 
 | **Métrique**                            | **Étude Originale** | **Résultats Reproduits** | **Commentaire**                                                                 |
 |-----------------------------------------|---------------------|--------------------------|---------------------------------------------------------------------------------|
@@ -100,12 +138,12 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Taux de parties illégales contre SF** | 93%                 | 93%                      | Les taux sont identiques, confirmant que GPT-3.5-Turbo a des difficultés à respecter les règles d’échecs. |
 | **Score (parties légales)**             | 0%                  | 0%                       | Résultats identiques : GPT-3.5-Turbo n’a remporté aucune des deux parties légales contre SF. |
 
+<br>
 
 
 ## Réplication
 
 ### Facteurs de variabilité
-## Facteurs de variabilité
 
 | **Facteurs de variabilité**   | **Valeurs possibles**                           | **Pertinence**                                                                           |
 |---------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------|
@@ -120,10 +158,9 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Dataset Size**          | 100 games, 500 games                         | Larger datasets increase robustness of conclusions                                     |
 | **API vs Local Execution**| API, Local Execution                         | API settings may differ from local model behavior                                      |
 
+<br>
 
-- **Contraintes entre les facteurs**:  
-
-## Contraintes et Interdépendances
+### Contraintes et Interdépendances
 
 | **Contrainte**                      | **Facteurs Impactés**                             | **Explication**                                                                                                                                      |
 |-------------------------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -136,7 +173,7 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Influence des adversaires**       | Adversaire, Longueur des parties                 | Les moteurs d’échecs puissants tendent à prolonger les parties, ce qui peut tester la capacité du modèle à rester précis sur de longues séquences.    |
 | **Métriques cohérentes**            | Métriques d’évaluation, Modèle, Adversaire       | Le calcul du pourcentage de coups légaux ou du Elo doit être appliqué de manière cohérente pour tous les modèles et adversaires.                     |
 
-
+<br>
 
 ### Exécution de la réplication
 1. **Instructions**  
@@ -162,13 +199,19 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
    Cette modification présente plusieurs avantages. Les transitions entre les valeurs de dp deviennent plus fluides, ce qui améliore la cohérence des résultats, en particulier pour des performances proches. De plus, la précision accrue de la formule permet de mieux différencier les modèles, même en cas de variations faibles dans leurs performances. Enfin, cette approche simplifie le calcul en éliminant la dépendance à une table externe, rendant la méthode plus flexible et adaptée à différents contextes.
    En conséquence, cette modification améliore la capacité du calcul de dp à refléter la performance réelle des modèles. 
 
-### Anciens résultats elo pour les modèles gpt-3.5-turbo-instruct et gpt-4 ###
+<br>
+<div align="center">
+  <img src="./oldElo.png" alt="Anciens résultats elo" style="width:50%;"><br>
+  <em>Figure 5 : Anciens résultats elo pour les modèles GPT-3.5-Turbo-Instruct et GPT-4</em>
+</div>
 
-![Anciens résultats](./oldElo.png)
-### Nouveau résultat elo obtenu pour les modèles gpt-3.5-turbo-instruct et gpt-4 avec modification de la fonction de dp ###
+<br>
 
-![Résultats après modifications du calcul de dp](./newElo.png)
-
+<div align="center">
+  <img src="./newElo.png" alt="Résultats après modifications du calcul de dp" style="width:50%;"><br>
+  <em>Figure 6 : Résultats après modifications du calcul de dp pour les modèles GPT-3.5-Turbo-Instruct et GPT-4</em>
+</div>
+<br>
 
 
 ### Est ce que ca confirme l'étude originale ?
