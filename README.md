@@ -170,9 +170,9 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 | **Adversaire et niveau de compétence** | Adversaire, Température                         | L'adversaire choisi (Stockfish vs moteur aléatoire) peut interagir différemment avec des réponses plus ou moins déterministes (contrôlées par la température). |
 | **Position initiale aléatoire**     | Initialisation des positions, Adversaire         | Les positions aléatoires (n=10 premiers coups) peuvent perturber davantage les moteurs faibles qu’un adversaire comme Stockfish.                     |
 | **Limites matérielles**             | Matériel, Modèle                                 | L'utilisation de modèles plus complexes (comme GPT-4) ou de paramètres exigeants (profondeur de Stockfish) dépend des capacités matérielles.         |
-| **Graines aléatoires**              | Graines aléatoires, Initialisation des positions | Une graine différente modifiera l’ordre des parties ou des positions initiales, rendant les comparaisons non reproductibles.                        |
+| **seed aléatoires**              | seed aléatoires, Initialisation des positions | Une seed différente modifiera l’ordre des parties ou des positions initiales, rendant les comparaisons non reproductibles.                        |
 | **Influence des adversaires**       | Adversaire, Longueur des parties                 | Les moteurs d’échecs puissants tendent à prolonger les parties, ce qui peut tester la capacité du modèle à rester précis sur de longues séquences.    |
-| **Métriques cohérentes**            | Métriques d’évaluation, Modèle, Adversaire       | Le calcul du pourcentage de coups légaux ou du Elo doit être appliqué de manière cohérente pour tous les modèles et adversaires.                     |
+
 
 <br>
 
