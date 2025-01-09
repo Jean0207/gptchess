@@ -172,5 +172,10 @@ Ces variations mineures, également constatées pour différentes températures,
 
 
 ## Conclusion
-- Recap findings from the reproducibility and replicability sections.
-- Discuss limitations of your
+En conclusion, cette étude a permis d’évaluer la reproductibilité et la robustesse des performances des grands modèles de langage (LLMs), tels que GPT-3.5-turbo-instruct et GPT-4, lorsqu’ils sont confrontés à des moteurs d’échecs dans diverses conditions expérimentales. Les résultats montrent que, bien que des différences mineures aient été observées après la modification de la formule de dp, celles-ci confirment les tendances générales de l’étude originale, validant ainsi les observations initiales.
+
+L’analyse a également mis en évidence l’importance de contrôler rigoureusement les facteurs de variabilité, tels que la formulation des prompts, la température, et la configuration des adversaires. Ces éléments jouent un rôle clé dans l’évaluation des performances des modèles. De plus, la modification de la formule de dp a démontré sa pertinence en améliorant la fluidité et la précision des classements Elo, tout en simplifiant le calcul.
+
+Cependant, certaines limites subsistent, notamment la dépendance des modèles aux ajustements de fine-tuning et leur sensibilité aux changements de paramètres expérimentaux. Ces limites soulignent la nécessité de poursuivre les recherches pour renforcer la robustesse et l’interprétabilité des performances des LLMs dans des contextes régis par des règles strictes, comme les échecs.
+
+Ainsi, cette étude contribue à une meilleure compréhension des capacités des LLMs dans des tâches structurées, tout en offrant une méthodologie reproductible pour évaluer leur performance. Elle ouvre la voie à de futures explorations visant à optimiser l’utilisation des modèles dans des environnements nécessitant une conformité stricte aux règles.
