@@ -157,13 +157,18 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
 
 ### Nouvel elo obtenu pour les modèles gpt-3.5-turbo-instruct et gpt-4 avec modification de la fonction de dp ###
 
+![Anciens résultats](./oldElo.png)
+![Résultats après modifications du calcul de dp](./newElo.png)
 ### Ancien elo pour les modèles gpt-3.5-turbo-instruct et gpt-4 ###
 
 
 
 ### Does It Confirm the Original Study?
-- Summarize the extent to which the replication supports the original study’s conclusions.
-- Highlight similarities and differences, if any.
+Après la modification de la formule de 
+dp, les résultats montrent des différences faibles dans les classements Elo des modèles, confirmant les tendances générales observées avant modification. Par exemple, pour GPT-3.5-turbo-instruct, l'Elo avec des parties légales uniquement passe de 1743.0 avant modification à 1738.0 après modification, tandis que l'Elo pour toutes les parties passe de 1696.0 à 1688.0. De même, pour GPT-4, l'Elo avec des parties légales uniquement varie légèrement de 1371.0 à 1471.0, et celui pour toutes les parties passe de 1305.0 à 1444.0.
+
+Ces variations mineures, également constatées pour différentes températures, confirment la cohérence des résultats initiaux. À 𝑡=0.0 t=0.0, par exemple, l'Elo de GPT-3.5-turbo-instruct reste quasiment inchangé (1789.0 avant modification contre 1780.0 après). Les résultats démontrent ainsi que la nouvelle formule de 𝑑𝑝 n'altère pas significativement les conclusions et valide les observations initiales.
+
 
 ## Conclusion
 - Recap findings from the reproducibility and replicability sections.
