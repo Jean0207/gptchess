@@ -6,17 +6,19 @@ Des affirmations récentes suggèrent que les grands modèles de langage (LLMs),
 
    ### Comment reproduire les résultats
    1. **Requirements**  
-   Dependencies and Versions
-   Base Image:
-   Utilisation de Docker pour standardiser l'environnement.
-   System Requirements
-   Docker :
-   Version minimale : 20.10.x.
-   Configuration système recommandée :
-   Minimum 4 Go de RAM pour l'exécution des conteneurs.
-   Minimum 10 Go d'espace disque disponible pour les images Docker.
-   Système d'exploitation :
-   Windows 11
+      ### Dependencies and Versions
+      - **Base Image**:  
+        Utilisation de Docker pour standardiser l'environnement.
+      
+      ### System Requirements
+      - **Docker**:  
+        - Version minimale : `20.10.x`.  
+        - Configuration système recommandée :  
+          - **Minimum 4 Go de RAM** pour l'exécution des conteneurs.  
+          - **Minimum 10 Go d'espace disque** disponible pour les images Docker.
+      
+      - **Système d'exploitation**:  
+        - **Windows 11**
 
 
 2. **Mise en place de l'environnement**  
