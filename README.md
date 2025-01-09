@@ -155,11 +155,12 @@ Solution : Nous avons remplacé les appels à .append par la méthode .concat, q
    Cette modification présente plusieurs avantages. Les transitions entre les valeurs de dp deviennent plus fluides, ce qui améliore la cohérence des résultats, en particulier pour des performances proches. De plus, la précision accrue de la formule permet de mieux différencier les modèles, même en cas de variations faibles dans leurs performances. Enfin, cette approche simplifie le calcul en éliminant la dépendance à une table externe, rendant la méthode plus flexible et adaptée à différents contextes.
    En conséquence, cette modification améliore la capacité du calcul de dp à refléter la performance réelle des modèles. 
 
-### Nouvel elo obtenu pour les modèles gpt-3.5-turbo-instruct et gpt-4 avec modification de la fonction de dp ###
+### Anciens r&sultats elo pour les modèles gpt-3.5-turbo-instruct et gpt-4 ###
 
 ![Anciens résultats](./oldElo.png)
+### Nouveau résultat elo obtenu pour les modèles gpt-3.5-turbo-instruct et gpt-4 avec modification de la fonction de dp ###
+
 ![Résultats après modifications du calcul de dp](./newElo.png)
-### Ancien elo pour les modèles gpt-3.5-turbo-instruct et gpt-4 ###
 
 
 
